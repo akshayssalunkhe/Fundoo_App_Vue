@@ -1,15 +1,14 @@
 <template>
-    <LoginPage></LoginPage>
+<div>
+    <router-view></router-view>
+</div>
 </template>
 
 <script>
-import LoginPage from './components/LoginPage'
 
 export default {
   name: 'App',
-  components: {
-    LoginPage
-  }
+  
 }
 </script>
 
