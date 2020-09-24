@@ -3,7 +3,12 @@
     <div class="login-container">
     
         <div class="fundoo">
-            <a>F</a>u<a2>n</a2><a>d</a><a4>o</a4>o
+            <a class="a1">F</a>
+            <a class="a2">u</a>
+            <a class="a3">n</a>
+            <a class="a4">d</a>
+            <a class="a5">o</a>
+            <a class="a6">o</a>
         </div>
         
         <div class="signin">
@@ -15,11 +20,11 @@
         </div>
         
         <div class="email">
-            <input class="emailinput" placeholder="Email Address">
+            <input class="emailinput" placeholder="Email Address" type="email">
         </div>
         
         <div class="password">
-            <input class="passwordinput" placeholder="password">
+            <input class="passwordinput" placeholder="password" type="password">
         </div>
         
         <div class="loginbtn">
@@ -78,13 +83,16 @@ export default {
     margin:5%;
 }
 
-a {
-  color: blue;
+.a1,.a4 {
+  color: rgb(106, 106, 252);
 }
-a2 {
-  color: #f0b000;
+.a2,.a6 {
+  color:rgb(241, 97, 97);
 }
-a4 {
+.a3{
+    color:rgb(243, 243, 77);
+}
+.a5 {
   color: #038803;
 }
 
