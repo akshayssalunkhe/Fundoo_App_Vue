@@ -67,7 +67,8 @@ export default {
 
 <style scoped>
 .maindiv{
-    margin-top: 10%;
+    /* margin-top: 10%; */
+    padding-top:10%;
 }
 
 .login-container {

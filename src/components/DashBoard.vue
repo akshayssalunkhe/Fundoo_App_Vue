@@ -1,70 +1,114 @@
 <template>
-  <div class="page-container">
+<div>
+
+<div class="page-container">
     <md-app>
-      <md-app-toolbar class="md-primary">
+      <md-app-toolbar class="md-primary" md-elevation="0">
         <md-button class="md-icon-button" @click="toggleMenu" v-if="!menuVisible">
-          <md-icon>menu</md-icon>
+          <md-icon>M</md-icon>
         </md-button>
-        <span class="md-title">My Title</span>
+        <span class="md-title">
+              <img src="../assets/Images/keep1.png" /> Fundoo
+        </span>
       </md-app-toolbar>
 
-      <md-app-drawer :md-active.sync="menuVisible" md-persistent="full">
+      <md-app-drawer :md-active.sync="menuVisible" md-persistent="mini">
         <md-toolbar class="md-transparent" md-elevation="0">
           <span>Navigation</span>
 
           <div class="md-toolbar-section-end">
             <md-button class="md-icon-button md-dense" @click="toggleMenu">
-              <md-icon>keyboard_arrow_left</md-icon>
+              <md-icon>B</md-icon>
             </md-button>
           </div>
         </md-toolbar>
 
         <md-list>
+         <md-list-item>
+            <md-icon on-hover="iconhover">N</md-icon>
+            <span class="md-list-item-text">Notes</span>
+          </md-list-item>
+
           <md-list-item>
-            <md-icon>move_to_inbox</md-icon>
+            <md-icon>I</md-icon>
             <span class="md-list-item-text">Inbox</span>
           </md-list-item>
 
           <md-list-item>
-            <md-icon>send</md-icon>
+            <md-icon>S</md-icon>
             <span class="md-list-item-text">Sent Mail</span>
           </md-list-item>
 
           <md-list-item>
-            <md-icon>delete</md-icon>
+            <md-icon>T</md-icon>
             <span class="md-list-item-text">Trash</span>
           </md-list-item>
 
           <md-list-item>
-            <md-icon>error</md-icon>
+            <md-icon>P</md-icon>
             <span class="md-list-item-text">Spam</span>
           </md-list-item>
         </md-list>
       </md-app-drawer>
 
       <md-app-content>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea.
+                THIS IS DASH BOARD
       </md-app-content>
     </md-app>
   </div>
+
+</div>
 </template>
 
 <script>
 export default {
-  name: 'TitleBar',
+  name: 'DashBoard',
     data: () => ({
       menuVisible: false
     }),
     methods: {
       toggleMenu () {
         this.menuVisible = !this.menuVisible
-      }
+      },
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  scoped>
+.md-list-item:hover{
+
+ background-color: whitesmoke;
+ border-top-right-radius: 20px ;
+ border-bottom-right-radius: 20px ;
+
+}
+.md-toolbar {
+  border:1px solid rgb(230, 228, 228);
+
+}
+.md-drawer.md-persistent-mini.md-left {
+    border-right:none;
+}
+.person{
+  margin-left:10%;
+}
+.md-title {
+
+  margin-right: 20% !important;
+}
+.search-bar {
+  position: relative;
+}
+.search-bar input {
+  padding-left: 30px;
+}
+.search-icon {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
   .md-app {
     min-height: 350px;
     border: 1px solid rgba(#000, .12);
