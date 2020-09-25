@@ -20,25 +20,48 @@
         </div>
         
         <div class="email">
-            <input class="emailinput" placeholder="Email Address" type="email">
+            <input class="emailinput" v-model="email" placeholder="Email Address" type="email" required >
         </div>
         
         <div class="password">
-            <input class="passwordinput" placeholder="password" type="password">
+            <input class="passwordinput" v-model="password" placeholder="password" type="password">
         </div>
         
         <div class="loginbtn">
-            <button type="submit">Log In</button>
+            <div class="createacc">Create Account</div>
+            <md-button class="md-raised md-primary" type="submit" @click="login">Log In</md-button>
+
         </div>
-        <div class="forgetpass">Forget Password?</div>
-        <div class="createacc">Create Account</div>
     </div>
  </div>
 </template>
 
 <script>
+import service from '../services/fundooservice'
 export default {
     name: "LoginPage",
+
+    data() {
+    return {
+      email: "",
+      password: "",
+     };
+  },
+  methods: {
+    login: function () {
+        const loginData = {
+         cartID: "",
+         email: this.email,
+         password: this.password,
+         result: "",
+       };
+
+     service.getLogin(loginData).then((response) => {
+         this.result = response.data;
+         console.log(this.result.email);
+       })
+     },
+  },
 }
 </script>
 
@@ -68,11 +91,9 @@ export default {
   font-family: fantasy;
   font-weight: bold;
   color: #d10303;
-  /* margin:5%; */
 }
 
 .emailinput,.passwordinput {
-  /* font-size: 28px; */
   width: 280px;
   height: 45px;
   border: solid 1px  #e7dcfe;
@@ -117,12 +138,13 @@ export default {
     background-color: #7070e6;
 }
 
-.createacc,.forgetpass{
+.createacc{
     color: #0606f8;
     cursor: pointer;
     margin: 5px 0px 0px 0px;
     display: flex;
     flex-direction: row;
     width:100%;
+    padding-top: 5px;
 }
 </style>
