@@ -43,6 +43,7 @@ export default {
 
     data() {
     return {
+      cartID:"",
       email: "",
       password: "",
      };
@@ -53,12 +54,13 @@ export default {
          cartID: "",
          email: this.email,
          password: this.password,
-         result: "",
+        
        };
 
      service.getLogin(loginData).then((response) => {
          this.result = response.data;
          console.log(this.result.email);
+         this.$router.push('/dashboard')
        })
      },
   },

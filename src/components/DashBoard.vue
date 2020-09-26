@@ -5,11 +5,19 @@
     <md-app>
       <md-app-toolbar class="md-primary" md-elevation="0">
         <md-button class="md-icon-button" @click="toggleMenu" v-if="!menuVisible">
-          <md-icon>M</md-icon>
+          <md-icon>menu</md-icon>
         </md-button>
         <span class="md-title">
               <img src="../assets/Images/keep1.png" /> Fundoo
         </span>
+        <!-- <md-input
+            class="search"
+            v-model="searchResult"
+            :md-options="noteList"
+            md-layout="box"
+          >
+          </md-input> -->
+
       </md-app-toolbar>
 
       <md-app-drawer :md-active.sync="menuVisible" md-persistent="mini">
@@ -18,19 +26,18 @@
 
           <div class="md-toolbar-section-end">
             <md-button class="md-icon-button md-dense" @click="toggleMenu">
-              <md-icon>B</md-icon>
+              <md-icon>keyboard_arrow_left</md-icon>
             </md-button>
           </div>
         </md-toolbar>
-
         <md-list>
          <md-list-item>
-            <md-icon on-hover="iconhover">N</md-icon>
+            <md-icon on-hover="iconhover">add</md-icon>
             <span class="md-list-item-text">Notes</span>
           </md-list-item>
 
           <md-list-item>
-            <md-icon>I</md-icon>
+            <md-icon>archive</md-icon>
             <span class="md-list-item-text">Inbox</span>
           </md-list-item>
 
@@ -40,17 +47,17 @@
           </md-list-item>
 
           <md-list-item>
-            <md-icon>T</md-icon>
+            <md-icon>delete</md-icon>
             <span class="md-list-item-text">Trash</span>
           </md-list-item>
 
           <md-list-item>
-            <md-icon>P</md-icon>
+            <md-icon>error</md-icon>
             <span class="md-list-item-text">Spam</span>
           </md-list-item>
         </md-list>
-      </md-app-drawer>
 
+      </md-app-drawer>
       <md-app-content>
                 THIS IS DASH BOARD
       </md-app-content>
