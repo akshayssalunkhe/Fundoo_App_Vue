@@ -5,6 +5,7 @@ import DashBoard from '../components/DashBoard'
 
 Vue.use(Router)
 export default new Router({
+    mode:"history",
     routes: [
         {
             path:'/login',
@@ -12,8 +13,8 @@ export default new Router({
             component:LoginPage,
         },
         {
-            path:'/DashBoard',
-            name:'DashBoard',
+            path:'/dashBoard',
+            name:'dashBoard',
             component:DashBoard
         }
     ]
