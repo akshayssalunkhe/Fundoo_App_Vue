@@ -32,28 +32,28 @@
         </md-toolbar>
         <md-list>
          <md-list-item>
-            <md-icon on-hover="iconhover">add</md-icon>
+            <md-icon on-hover="iconhover">emoji_objects</md-icon>
             <span class="md-list-item-text">Notes</span>
           </md-list-item>
 
           <md-list-item>
-            <md-icon>archive</md-icon>
-            <span class="md-list-item-text">Inbox</span>
+            <md-icon>notifications</md-icon>
+            <span class="md-list-item-text">Reminders</span>
           </md-list-item>
 
           <md-list-item>
-            <md-icon>S</md-icon>
-            <span class="md-list-item-text">Sent Mail</span>
+            <md-icon>edit</md-icon>
+            <span class="md-list-item-text">Edit Lables</span>
           </md-list-item>
-
+       
+          <md-list-item>
+            <md-icon>archive</md-icon>
+            <span class="md-list-item-text">Archive</span>
+          </md-list-item>
+          
           <md-list-item>
             <md-icon>delete</md-icon>
             <span class="md-list-item-text">Trash</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>error</md-icon>
-            <span class="md-list-item-text">Spam</span>
           </md-list-item>
         </md-list>
 
@@ -83,6 +83,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  scoped>
+.md-overlay{
+  background: none;
+}
 .md-list-item:hover{
 
  background-color: whitesmoke;
