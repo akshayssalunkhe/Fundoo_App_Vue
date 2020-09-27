@@ -10,14 +10,23 @@
         <span class="md-title">
               <img src="../assets/Images/keep1.png" /> Fundoo
         </span>
-        <!-- <md-input
-            class="search"
-            v-model="searchResult"
-            :md-options="noteList"
-            md-layout="box"
-          >
-          </md-input> -->
+       <div class="md-toolbar-section-end">
+          
+          <md-button class="md-icon-button">
+            <md-icon>shopping_cart</md-icon>
+          </md-button>
 
+          <md-button class="md-icon-button">
+            <md-icon>view_stream</md-icon>
+          </md-button>
+
+          <md-button class="md-icon-button">
+            <md-avatar>
+              <img src="../assets/Images/keep1.png" alt="Avatar">
+           </md-avatar>
+          </md-button>
+
+      </div>
       </md-app-toolbar>
 
       <md-app-drawer :md-active.sync="menuVisible" md-persistent="mini">
@@ -25,9 +34,9 @@
           <span>Navigation</span>
 
           <div class="md-toolbar-section-end">
-            <md-button class="md-icon-button md-dense" @click="toggleMenu">
-              <md-icon>keyboard_arrow_left</md-icon>
-            </md-button>
+              <md-button class="md-icon-button md-dense" @click="toggleMenu">
+                <md-icon>keyboard_arrow_left</md-icon>
+              </md-button>
           </div>
         </md-toolbar>
         <md-list>
@@ -57,9 +66,24 @@
           </md-list-item>
         </md-list>
 
-      </md-app-drawer>
-      <md-app-content>
-                THIS IS DASH BOARD
+       </md-app-drawer>
+     
+      <md-app-content>                 
+          
+        <md-toolbar class="md-primary-Note">
+            <div class="md-toolbar-row">
+               <p class="TAN"> Take a note... </p>       
+              <div class="md-toolbar-section-end">
+                <md-button class="md-icon-button">
+                  <md-icon>view_list</md-icon>
+                </md-button>
+                <md-button class="md-icon-button">
+                  <md-icon>panorama</md-icon>
+                </md-button>
+              </div>
+            </div>
+        </md-toolbar>
+                 
       </md-app-content>
     </md-app>
   </div>
@@ -83,6 +107,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  scoped>
+.TAN{
+  font-size: 120%;
+  padding-left:5%;
+}
+.md-primary-Note{
+width: 50%;
+margin-left: 20%;
+padding:0.5%;
+}
+
+
 .md-overlay{
   background: none;
 }
@@ -113,13 +148,7 @@ export default {
 .search-bar input {
   padding-left: 30px;
 }
-.search-icon {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-}
-
-  .md-app {
+.md-app {
     min-height: 350px;
     border: 1px solid rgba(#000, .12);
   }
