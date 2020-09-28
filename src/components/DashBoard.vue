@@ -83,7 +83,7 @@
               </div>
             </div>
         </md-toolbar>
-                 
+                 <NoteCard></NoteCard>
       </md-app-content>
     </md-app>
   </div>
@@ -92,11 +92,15 @@
 </template>
 
 <script>
+import NoteCard from './NoteCard';
 export default {
   name: 'DashBoard',
     data: () => ({
       menuVisible: false
     }),
+    components: {
+   NoteCard,
+  },
     methods: {
       toggleMenu () {
         this.menuVisible = !this.menuVisible
