@@ -4,7 +4,7 @@
         <div class="takenote" @click="show=!show" v-if="show">
            <md-toolbar class="md-primary-Note">
             <div class="md-toolbar-row">
-            <p class="TAN"> Take a note... </p>       
+            <p class="Tan"> Take a note... </p>       
              <div class="md-toolbar-section-end">
             <md-button class="md-icon-button">
                <md-icon>view_list</md-icon>
@@ -23,7 +23,7 @@
      <md-card-header class="Title-input">
         <div class="md-title">
             <md-field>
-                <md-input v-model="Title" placeholder="Title...">                
+                <md-input v-model="title" placeholder="Title...">                
                 </md-input>
                 
                 <md-button class="md-icon-button">
@@ -35,7 +35,7 @@
 
       <md-card-content class="content-input">
        <md-field>
-            <md-textarea v-model="content" placeholder="Take a Note.."></md-textarea>
+            <md-textarea v-model="description" placeholder="Take a Note.."></md-textarea>
           </md-field>
       </md-card-content>
 
@@ -58,7 +58,7 @@
                 <md-button class="md-icon-button">
                   <md-icon>more_vert</md-icon>
                 </md-button>
-        <md-button @click="show=!show">Close</md-button>
+        <md-button @click="addNote()">Close</md-button>
       </md-card-actions>
     </md-card>
 </div>
@@ -68,16 +68,40 @@
 </template>
 
 <script>
+import UserService from "../services/UserService";
+
 export default {
     name:"CreateNote",
      data(){
          return{
-    Title:'',
-    content:'',
+            //  userId:'',
+    title:'',
+    description:'',
     show:true,
          }
 
     },
+    methods:{
+    
+    addNote: function () {
+      this.show=!this.show;
+      const note = {
+        title: this.title,
+        description: this.description,
+      };
+      UserService.addNote(note).then((response) => {
+        this.responseData = response.data;
+        this.title = "";
+        this.description = "";
+        this.userId="";
+      });
+    },
+},
+   created() {
+    if (localStorage.getItem("token") == undefined) {
+      this.$router.push("/login");
+    }
+  }
 }
 </script>
 <style  scoped>

@@ -60,6 +60,7 @@ export default {
      service.getLogin(loginData).then((response) => {
          this.result = response.data;
          console.log(this.result.email);
+         localStorage.setItem('token', this.result['id'])
          this.$router.push('/dashboard')
        })
      },

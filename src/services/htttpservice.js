@@ -4,11 +4,39 @@ import axios from 'axios';
 
 export default {
 
-    post(login, Data) {
+    post(path, Data) {
         return axios({
             method: 'post', 
-            url: `http://fundoonotes.incubation.bridgelabz.com/api/${login}`,
+            url: `http://fundoonotes.incubation.bridgelabz.com/api/${path}`,
             data: Data,
+            // headers: {
+            //     'Content-Type': 'application/json',
+            //     'Authorization':localStorage.getItem('token')
+            // }  
+            
         })
     },
+
+    postNote(path, Data) {
+        return axios({
+            method: 'post', 
+            url: `http://fundoonotes.incubation.bridgelabz.com/api/${path}`,
+            data: Data,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization':localStorage.getItem('token')
+            } 
+        })
+    },
+   
+    get(path){
+        return axios({
+            method:'get',
+            url:`${URL}/${path}`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization':localStorage.getItem('token')
+            } 
+        })
+    }
 }
