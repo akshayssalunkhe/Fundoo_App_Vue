@@ -10,6 +10,7 @@
         <span class="md-title">
               <img src="../assets/Images/keep1.png" /> Fundoo
         </span>
+       
        <div class="md-toolbar-section-end">
           
           <md-button class="md-icon-button">
@@ -29,7 +30,9 @@
       </div>
       </md-app-toolbar>
 
-      <md-app-drawer :md-active.sync="menuVisible" md-persistent="mini">
+      <md-app-drawer :md-active.sync="menuVisible" 
+       md-permanent="clipped"
+      md-persistent="mini">
         <md-toolbar class="md-transparent" md-elevation="0">
           <span>Navigation</span>
 
@@ -69,21 +72,7 @@
        </md-app-drawer>
      
       <md-app-content>                 
-          
-        <md-toolbar class="md-primary-Note">
-            <div class="md-toolbar-row">
-               <p class="TAN"> Take a note... </p>       
-              <div class="md-toolbar-section-end">
-                <md-button class="md-icon-button">
-                  <md-icon>view_list</md-icon>
-                </md-button>
-                <md-button class="md-icon-button">
-                  <md-icon>panorama</md-icon>
-                </md-button>
-              </div>
-            </div>
-        </md-toolbar>
-                 <NoteCard></NoteCard>
+    <CreateNote></CreateNote>
       </md-app-content>
     </md-app>
   </div>
@@ -92,14 +81,14 @@
 </template>
 
 <script>
-import NoteCard from './NoteCard';
+import CreateNote from './CreateNote';
 export default {
   name: 'DashBoard',
     data: () => ({
       menuVisible: false
     }),
     components: {
-   NoteCard,
+   CreateNote,
   },
     methods: {
       toggleMenu () {
@@ -111,16 +100,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  scoped>
-.TAN{
-  font-size: 120%;
-  padding-left:5%;
-}
+
 .md-primary-Note{
 width: 50%;
 margin-left: 20%;
 padding:0.5%;
 }
-
 
 .md-overlay{
   background: none;
@@ -132,7 +117,7 @@ padding:0.5%;
  border-bottom-right-radius: 20px ;
 
 }
-.md-toolbar {
+.md-app-toolbar {
   border:1px solid rgb(230, 228, 228);
 
 }
@@ -156,9 +141,7 @@ padding:0.5%;
     min-height: 350px;
     border: 1px solid rgba(#000, .12);
   }
-
-   
-  .md-drawer {
+.md-drawer {
     width: 230px;
     max-width: calc(100vw - 125px);
   }

@@ -1,6 +1,6 @@
 <template>
 <div >
-    <md-card class="NoteCard">
+    <md-card class="NoteCard" v-if=!show>
      
       <md-card-header class="Title-input">
         <div class="md-title">
@@ -9,7 +9,7 @@
                 </md-input>
                 
                 <md-button class="md-icon-button">
-                  <md-icon>person_add</md-icon>
+                  <md-icon>add</md-icon>
                 </md-button>
             </md-field>
           </div>
@@ -40,7 +40,7 @@
                 <md-button class="md-icon-button">
                   <md-icon>more_vert</md-icon>
                 </md-button>
-        <md-button>Close</md-button>
+        <md-button @click="show=!show">Close</md-button>
       </md-card-actions>
     </md-card>
 </div>
@@ -51,6 +51,7 @@ export default {
     name:"NoteCard",
  data() {
     return {
+        show:false,
       Title:"",
       content: "",
      };
@@ -63,7 +64,7 @@ export default {
     background-color:white;
     flex: 1 1 500px;
     box-sizing: border-box;
-    border-radius: 5%;
+    border-radius: 3%;
     max-width: 500px;
     min-width: 500px;
     margin-left: 20%;
