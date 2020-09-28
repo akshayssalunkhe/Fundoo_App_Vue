@@ -1,5 +1,5 @@
 <template>
-<div class="takenote" @click="show=!show" v-if="show">
+<div class="takenote" @click="showNoteCard" v-if="show">
 <md-toolbar class="md-primary-Note">
    <div class="md-toolbar-row">
         <p class="TAN"> Take a note... </p>       
@@ -22,8 +22,12 @@ export default {
     data(){
 return{
     show:true,
+      } 
+},
+methods:{
+    showNotecard(valueOfShow)
 }
-    }
+
 }
 </script>
 <style  scoped>
