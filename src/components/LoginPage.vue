@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import service from '../services/fundooservice'
+import service from '../services/UserService'
 export default {
     name: "LoginPage",
 
