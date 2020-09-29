@@ -32,7 +32,7 @@ export default {
     get(path){
         return axios({
             method:'get',
-            url:`${URL}/${path}`,
+            url: `http://fundoonotes.incubation.bridgelabz.com/api/${path}`,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization':localStorage.getItem('token')

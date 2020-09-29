@@ -1,6 +1,5 @@
 <template>
     <div>
-    
         <div class="takenote" @click="show=!show" v-if="show">
            <md-toolbar class="md-primary-Note">
             <div class="md-toolbar-row">

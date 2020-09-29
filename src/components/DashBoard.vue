@@ -73,6 +73,7 @@
      
       <md-app-content>                 
     <CreateNote></CreateNote>
+    <NoteCard></NoteCard>
       </md-app-content>
     </md-app>
   </div>
@@ -82,6 +83,7 @@
 
 <script>
 import CreateNote from './CreateNote';
+import NoteCard from './NoteCard'
 export default {
   name: 'DashBoard',
     data: () => ({
@@ -89,6 +91,7 @@ export default {
     }),
     components: {
    CreateNote,
+   NoteCard,
   },
     methods: {
       toggleMenu () {

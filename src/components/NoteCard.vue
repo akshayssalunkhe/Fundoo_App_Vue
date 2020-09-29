@@ -1,28 +1,28 @@
 <template>
 <div >
-    <md-card class="NoteCard" v-if=!show>
-     
-      <md-card-header class="Title-input">
-        <div class="md-title">
-            <md-field>
-                <md-input v-model="Title" placeholder="Title...">                
-                </md-input>
+ <div class="note-cards" v-for=" note in noteList " v-bind:key= "note">
+
+    <md-card class="NoteCard">
+            <md-card-header class="Title-input">
+              <div class="md-title">
+                <md-field>
+                  <md-input placeholder="Title...">{{note.title}}</md-input>
                 
+                  <md-button class="md-icon-button">
+                    <md-icon>add</md-icon>
+                  </md-button>
+                </md-field>
+              </div>
+            </md-card-header>
+
+            <md-card-content class="content-input">
+              <md-field>
+                <md-textarea placeholder="Take a Note..">{{note.description}}</md-textarea>
+              </md-field>
+            </md-card-content>
+
+              <md-card-actions>
                 <md-button class="md-icon-button">
-                  <md-icon>add</md-icon>
-                </md-button>
-            </md-field>
-          </div>
-      </md-card-header>
-
-      <md-card-content class="content-input">
-       <md-field>
-            <md-textarea v-model="content" placeholder="Take a Note.."></md-textarea>
-          </md-field>
-      </md-card-content>
-
-      <md-card-actions>
-          <md-button class="md-icon-button">
                   <md-icon>notifications</md-icon>
                 </md-button>
                 <md-button class="md-icon-button">
@@ -40,23 +40,35 @@
                 <md-button class="md-icon-button">
                   <md-icon>more_vert</md-icon>
                 </md-button>
-        <md-button @click="show=!show">Close</md-button>
-      </md-card-actions>
-    </md-card>
+                <md-button>Close</md-button>
+          </md-card-actions>
+        </md-card>
+      </div>
 </div>
 </template>
 
 <script>
+import UserService from '../services/UserService'
 export default {
-    name:"NoteCard",
- data() {
+  name: "NoteCard",
+  data() {
     return {
-        show:false,
-      Title:"",
-      content: "",
-     };
+      noteList: [],
+    };
   },
-  }
+  methods: {
+    fetchNotes: function () {
+      UserService.fetchNotesList().then((response) => {
+        this.noteList = response.data;
+        console.log("fetch notes function ")
+      });
+    },
+  },
+  mounted() {
+    this.fetchNotes();
+    console.log(this.noteList)
+  },
+};
 </script>
 
 <style scoped>
