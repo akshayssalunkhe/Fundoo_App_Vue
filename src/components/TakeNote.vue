@@ -25,7 +25,7 @@ return{
       } 
 },
 methods:{
-    showNotecard(valueOfShow)
+    showNotecard()
 }
 
 }
