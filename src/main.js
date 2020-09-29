@@ -14,6 +14,9 @@ Vue.use(VueAxios, axios)
 
 Vue.use(VueMaterial)
 
+export const eventBus = new Vue();
+
+
 new Vue({
   render: h => h(App),
   router,

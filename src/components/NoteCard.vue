@@ -2,7 +2,7 @@
 
 <div class="display-all-notes">
     <div class="note-cards" v-for="(note,index) in noteList" v-bind:key="index">
-      <md-card>
+      <md-card @click.native="getID(note)">
         <label class="title">{{ note.title }}</label
         ><br />
         <label class="description">{{ note.description }}</label
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { eventBus } from "../main";
+
 import MoreVertIcon from './Icons/MoreVertIcon'
 import DeleteIcon from './Icons/DeleteIcon'
 import ColorPallete from './Icons/ColorPallete'
@@ -31,6 +33,7 @@ export default {
     return {
 
       noteList: [],
+      cartId:[],
     };
     
   },
@@ -43,16 +46,28 @@ export default {
   methods: {
     fetchNotes: function () {
       UserService.fetchNotesList().then((response) => {
-        this.noteList = response.data.data.data;
-        console.log(this.noteList)
+        // this.noteList = response.data.data.data;
+        // console.log(this.noteList)
+       response.data.data.data.forEach((element) => {
+          if (element.isDeleted == false && element.isArchived == false) {
+            this.noteList.push(element);
+          }
+        });
+
       });
     },
+    getID: function (data) {
+      this.cardId = data.id;
+      eventBus.$emit("getNoteId", this.cardId);
+    },
   },
-  mounted() {
+  created() {
     this.fetchNotes();
-    console.log(this.noteList)
-  },
-};
+    eventBus.$on("getUpdatedNoteList", (data) => {
+    this.noteList = data;
+    });
+},
+}
 </script>
 
 <style scoped>

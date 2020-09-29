@@ -55,6 +55,8 @@ import ColorPallete from './Icons/ColorPallete'
 import ArchiveIcon from './Icons/ArchiveIcon'
 import MoreVertIcon from './Icons/MoreVertIcon'
 import UserService from "../services/UserService";
+import {eventBus} from '..main'
+
 
 export default {
     name:"CreateNote",
@@ -63,6 +65,8 @@ export default {
     title:'',
     description:'',
     show:true,
+    noteList:[],
+
     components:{
         ColorPallete,
         ArchiveIcon,
@@ -71,7 +75,15 @@ export default {
    }
        },
     methods:{
-    
+      fetchNotes: function () {
+      UserService.fetchNotesList().then((response) => {
+        response.data.data.data.forEach((element) => {
+          if (element.isDeleted == false && element.isArchived == false) {
+            this.noteList.push(element);
+          }
+        });
+      });
+    },
     addNote: function () {
       this.show=!this.show;
       const note = {
@@ -84,6 +96,8 @@ export default {
         this.description = "";
         this.userId="";
       });
+      this.fetchNotes();
+        eventBus.$emit("getUpdatedNoteList", this.noteList);
     },
 },
    created() {

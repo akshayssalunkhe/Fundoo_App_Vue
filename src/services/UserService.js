@@ -17,5 +17,13 @@ export default {
 
     fetchNotesList(){
         return httpservice.get('notes/getNotesList')
+    },
+
+    moveToArchive(archiveData){
+        return httpservice.postNote('notes/archiveNotes',archiveData)
+    },
+
+    fetchArchiveNotesList(){
+        return httpservice.get('notes/getArchiveNotesList')
     }
 }
