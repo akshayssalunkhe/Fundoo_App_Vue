@@ -1,9 +1,9 @@
 <template>
-    <div>
+ <div>
         <div class="takenote" @click="show=!show" v-if="show">
            <md-toolbar class="md-primary-Note">
             <div class="md-toolbar-row">
-            <p class="Tan"> Take a note... </p>       
+               <p class="Tan"> Take a note... </p>       
              <div class="md-toolbar-section-end">
             <md-button class="md-icon-button">
                <md-icon>view_list</md-icon>
@@ -22,7 +22,7 @@
     <div class="Title-input">  
      <div class="md-title">
             <md-field>
-                <md-input v-model="title" placeholder="Title...">                
+                <md-input v-model="title" class="titlepc" placeholder="Title...">                
                 </md-input>            
             </md-field>
           </div>
@@ -55,9 +55,6 @@ import ColorPallete from './Icons/ColorPallete'
 import ArchiveIcon from './Icons/ArchiveIcon'
 import MoreVertIcon from './Icons/MoreVertIcon'
 import UserService from "../services/UserService";
-import {eventBus} from '..main'
-
-
 export default {
     name:"CreateNote",
      data(){
@@ -65,8 +62,6 @@ export default {
     title:'',
     description:'',
     show:true,
-    noteList:[],
-
     components:{
         ColorPallete,
         ArchiveIcon,
@@ -75,15 +70,7 @@ export default {
    }
        },
     methods:{
-      fetchNotes: function () {
-      UserService.fetchNotesList().then((response) => {
-        response.data.data.data.forEach((element) => {
-          if (element.isDeleted == false && element.isArchived == false) {
-            this.noteList.push(element);
-          }
-        });
-      });
-    },
+    
     addNote: function () {
       this.show=!this.show;
       const note = {
@@ -96,8 +83,6 @@ export default {
         this.description = "";
         this.userId="";
       });
-      this.fetchNotes();
-        eventBus.$emit("getUpdatedNoteList", this.noteList);
     },
 },
    created() {
@@ -108,20 +93,30 @@ export default {
 }
 </script>
 <style  scoped>
+.md-toolbar-row{
+  min-height: 10px;
+}
+.md-primary-Note{
+  min-height:10px;
+  border-radius: 10px;
+}
 .takenote{
-    margin-right: 30%;
-    margin-left: 30%;
+  margin-top:2%;
+    margin-right: 25%;
+    margin-left: 25%;
 }
 .NoteCard{
-  height: 140px;
+    margin-top:2%;
+    height: 150px;
     background-color:white;
     flex: 1 1 500px;
     box-sizing: border-box;
-    border-radius: 3%;
-    max-width: 500px;
-    min-width: 300px;
-    margin-right: 30%;
-    margin-left: 30%;
+    border-radius: 10px;
+    max-width: 700px;
+    min-width: 700px;
+    margin-right: 25%;
+    margin-left: 25%;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
 }
 .md-field.md-has-textarea:not(.md-autogrow) .md-textarea {
     min-height: 40px;
@@ -132,6 +127,10 @@ export default {
   padding-top: 0px;;
     margin: 0px;
     padding-left: 5px;
+}
+.titlepc{
+  padding-left:15px; 
+  padding-top: 10px;
 }
 .Title-input,.content-input{
     border: none;
@@ -148,6 +147,6 @@ export default {
     padding-left: 10px;
 }
 .md-card-actions.md-alignment-right {
-    justify-content: space-around;
+    justify-content: flex-end;
 }
 </style>
