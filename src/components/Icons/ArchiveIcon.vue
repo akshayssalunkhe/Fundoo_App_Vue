@@ -1,15 +1,18 @@
 <template>
-<div>
-      <md-button class="md-icon-button" @click="sendToArchive">
+<div @click="sendToArchive()">
+      <md-button class="md-icon-button">
            <md-icon>archive</md-icon>
        </md-button>
 </div>
 </template>
 
 <script>
-import { eventBus } from ".../main"
-import UserService from 'C:\Vuejsprojects\fundooapp\src\services\UserService.js'
+import { eventBus } from "../../main"
+import UserService from '../../services/UserService'
 export default {
+  props:[
+'note.noteId'
+  ],
  name: "ArchiveIcon",
   data() {
     return {
@@ -28,18 +31,23 @@ export default {
       });
     },
     sendToArchive: function () {
-      const archiveData = {
-        noteIdList: [this.cartId],
+      alert("in send to archive");
+      const data = {
+        isArchived:true,
+        noteIdList: [this.note.noteId],
       };
-      UserService.moveToArchive(archiveData).then(() => {
+      alert("going to user service")
+      UserService.moveToArchive(data).then(() => {
+        alert("return from http")
         this.fetchNotes();
-        eventBus.$emit("getUpdatedNoteList", this.noteList);
+        //  eventBus.$emit("getUpdatedNoteList", this.noteList);
       });
     },
   },
   created() {
     eventBus.$on("getNoteId", (data) => {
-      this.cartId = data;
+      this.noteId = data;
+      console.log(this.note.noteId)
     });
   },
 };
