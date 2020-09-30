@@ -20,10 +20,16 @@ export default {
     },
 
     moveToArchive(archiveData){
-        return httpservice.postNote('notes/archiveNotes',archiveData)
+        alert("in user service")
+        return httpservice.postNote('notes/archiveNotes',archiveData),
+        
+        console.log(archiveData)
     },
 
     fetchArchiveNotesList(){
         return httpservice.get('notes/getArchiveNotesList')
+    },
+    fetchTrashNotesList(){
+        return httpservice.get('notes/getTrashNotesList')
     }
 }
