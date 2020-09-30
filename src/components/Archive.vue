@@ -1,20 +1,10 @@
 <template>
   <div class="archive-main flex-properties">
-    <div
-      class="archive-container flex-properties"
-      v-for="note in archiveList"
-      v-bind:key="note"
-    >
-      <md-card>
-        <label class="content">{{ note.title }}</label
-        ><br />
-        <label class="description content">{{ note.description }}</label
-        ><br />
-      </md-card>
-    </div>
+    <DisplayNotes v-bind:noteList="archiveList"></DisplayNotes>
   </div>
 </template>
 <script>
+import DisplayNotes from '../components/DisplayNotes'
 import UserService from "../services/UserService";
 export default {
   name: "Archive",
@@ -23,10 +13,16 @@ export default {
       archiveList: [],
     };
   },
+  components:{
+      DisplayNotes,
+  },
+  
   methods: {
     fetchArchiveList: function () {
       UserService.fetchArchiveNotesList().then((response) => {
         this.archiveList = response.data.data.data;
+        console.log(this.archiveList)
+        alert("Archive fetchnotesList")
       });
     },
   },
@@ -39,39 +35,5 @@ export default {
 .flex-properties {
   display: flex;
   flex-direction: row;
-}
-.trash-main {
-  margin-left: 10%;
-  width: 60%;
-  height: 684px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.trash-container {
-  margin-top: 20px;
-}
-.md-card {
-  margin: 8px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 5%;
-  height: min-content;
-  width: 190px;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  text-align: start;
-  padding: 18px;
-}
-.content {
-  font-weight: bold;
-  font-size: 18px;
-  max-width: 90%;
-  opacity: 0.6;
-  cursor: text;
-  margin: 0px 0px 10px 0px;
-}
-.description {
-  font-size: 16px;
-  font-weight: 500;
 }
 </style>
