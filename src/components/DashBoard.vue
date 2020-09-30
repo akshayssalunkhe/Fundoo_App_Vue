@@ -4,13 +4,12 @@
 <div class="page-container">
     <md-app>
       <md-app-toolbar class="md-primary" md-elevation="0">
-        <md-button class="md-icon-button" @click="toggleMenu" v-if="!menuVisible">
+        <md-button class="md-icon-button" @click="toggleMenu" >
           <md-icon>menu</md-icon>
         </md-button>
         <span class="md-title">
               <img src="../assets/Images/keep1.png" /> Fundoo
         </span>
-       
        <div class="md-toolbar-section-end">
           <md-button class="md-icon-button">
             <md-avatar>
@@ -22,17 +21,8 @@
 
       <md-app-drawer :md-active.sync="menuVisible" 
        md-permanent="clipped"
-       md-persistent="mini">
-        <md-toolbar class="md-transparent" md-elevation="0">
-          <span>Navigation</span>
-          <div class="md-toolbar-section-end">
-              <md-button class="md-icon-button md-dense" @click="toggleMenu">
-                <md-icon>keyboard_arrow_left</md-icon>
-              </md-button>
-          </div>
-        </md-toolbar>
-        
-        <md-list>
+       md-persistent="mini">   
+       <md-list>
          <md-list-item>
            <NotesIcon></NotesIcon>
             <span class="md-list-item-text">Notes</span>
@@ -62,8 +52,7 @@
        </md-app-drawer>
      
       <md-app-content>                 
-    <CreateNote></CreateNote>
-    <NoteCard></NoteCard>
+         <router-view></router-view>
       </md-app-content>
     </md-app>
   </div>
@@ -76,17 +65,15 @@ import EditIcon from './Icons/EditIcon'
 import ReminderIcon from './Icons/ReminderIcon'
 import NotesIcon from './Icons/NotesIcon'
 import DeleteIcon from './Icons/DeleteIcon'
-import CreateNote from './CreateNote'
-import NoteCard from './NoteCard'
 import ArchiveIcon from './Icons/ArchiveIcon'
+import UserService from '../services/UserService'
+
 export default {
   name: 'DashBoard',
     data: () => ({
       menuVisible: false
     }),
     components: {
-   CreateNote,
-   NoteCard,
    ArchiveIcon,
    DeleteIcon,
    EditIcon,
@@ -97,6 +84,18 @@ export default {
       toggleMenu () {
         this.menuVisible = !this.menuVisible
       },
+      fetchNotes: function () {
+      UserService.fetchNotesList().then((response) => {
+        // this.noteList = response.data.data.data;
+        // console.log(this.noteList)
+       response.data.data.data.forEach((element) => {
+          if (element.isDeleted == false && element.isArchived == false) {
+            this.noteList.push(element);
+          }
+        });
+
+      });
+    },
     }
   }
 </script>
@@ -133,6 +132,7 @@ padding:0.5%;
 
   margin-right: 20% !important;
 }
+
 .search-bar {
   position: relative;
 }
