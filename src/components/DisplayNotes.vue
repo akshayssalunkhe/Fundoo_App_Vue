@@ -5,7 +5,7 @@
         <label class="title">{{ note.title }}</label><br />
         <label class="description">{{ note.description }}</label><br />
         <div class="notebox-icons">
-                <ArchiveIcon v-bind:noteId="this.note.noteId"></ArchiveIcon>
+                <ArchiveIcon></ArchiveIcon>
                 <ColorPallete></ColorPallete>
                 <DeleteIcon></DeleteIcon>
                 <MoreVertIcon></MoreVertIcon>
