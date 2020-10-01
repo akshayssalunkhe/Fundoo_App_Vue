@@ -23,7 +23,7 @@
        md-permanent="clipped"
        md-persistent="mini">   
        <md-list>
-         <md-list-item>
+         <md-list-item @click= "routing('notes')">
            <NotesIcon></NotesIcon>
             <span class="md-list-item-text">Notes</span>
           </md-list-item>
@@ -38,12 +38,12 @@
             <span class="md-list-item-text">Edit Lables</span>
           </md-list-item>
        
-          <md-list-item>
+          <md-list-item @click= "routing('archive')">
             <ArchiveIcon></ArchiveIcon>
             <span class="md-list-item-text">Archive</span>
           </md-list-item>
           
-          <md-list-item>
+          <md-list-item @click= "routing('trash')">
             <DeleteIcon></DeleteIcon>
             <span class="md-list-item-text">Trash</span>
           </md-list-item>
@@ -66,7 +66,6 @@ import ReminderIcon from './Icons/ReminderIcon'
 import NotesIcon from './Icons/NotesIcon'
 import DeleteIcon from './Icons/DeleteIcon'
 import ArchiveIcon from './Icons/ArchiveIcon'
-import UserService from '../services/UserService'
 
 export default {
   name: 'DashBoard',
@@ -84,18 +83,9 @@ export default {
       toggleMenu () {
         this.menuVisible = !this.menuVisible
       },
-      fetchNotes: function () {
-      UserService.fetchNotesList().then((response) => {
-        // this.noteList = response.data.data.data;
-        // console.log(this.noteList)
-       response.data.data.data.forEach((element) => {
-          if (element.isDeleted == false && element.isArchived == false) {
-            this.noteList.push(element);
-          }
-        });
-
-      });
-    },
+      routing :function (route) {
+        this.$router.push("/dashboard/"+(route));
+      }
     }
   }
 </script>
