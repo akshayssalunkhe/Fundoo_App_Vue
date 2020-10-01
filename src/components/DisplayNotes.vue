@@ -7,7 +7,7 @@
         <div class="notebox-icons">
                 <ArchiveIcon :note="note"></ArchiveIcon>
                 <ColorPallete></ColorPallete>
-                <DeleteIcon></DeleteIcon>
+                <DeleteIcon :note="note"></DeleteIcon>
                 <MoreVertIcon></MoreVertIcon>
 
         </div>

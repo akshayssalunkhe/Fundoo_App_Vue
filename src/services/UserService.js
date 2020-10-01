@@ -29,6 +29,14 @@ export default {
     fetchArchiveNotesList(){
         return httpservice.get('notes/getArchiveNotesList')
     },
+
+    moveToTrash(trashData){
+        alert("in user service")
+        return httpservice.postNote('notes/trashNotes',trashData),
+        
+        console.log(trashData)
+    },
+
     fetchTrashNotesList(){
         return httpservice.get('notes/getTrashNotesList')
     }
