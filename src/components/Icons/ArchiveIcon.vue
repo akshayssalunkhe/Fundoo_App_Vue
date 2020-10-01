@@ -10,9 +10,9 @@
 import { eventBus } from "../../main"
 import UserService from '../../services/UserService'
 export default {
-  props:[
-'note.noteId'
-  ],
+  props:{
+note:Object,
+  },
  name: "ArchiveIcon",
   data() {
     return {
@@ -32,15 +32,15 @@ export default {
     },
     sendToArchive: function () {
       alert("in send to archive");
+        alert("abc ",this.$props.note.id)
+
       const data = {
         isArchived:true,
-        noteIdList: [this.note.noteId],
+        noteIdList: [this.$props.note.id],
       };
-      alert("going to user service")
-      UserService.moveToArchive(data).then(() => {
-        alert("return from http")
+        UserService.moveToArchive(data).then(() => {
         this.fetchNotes();
-        //  eventBus.$emit("getUpdatedNoteList", this.noteList);
+        eventBus.$emit("notelistupdate", this.noteList);
       });
     },
   },
@@ -49,8 +49,8 @@ export default {
       this.noteId = data;
       console.log(this.note.noteId)
     });
-  },
-};
+},
+}
 </script>
 
 <style scoped>

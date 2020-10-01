@@ -5,7 +5,7 @@
         <label class="title">{{ note.title }}</label><br />
         <label class="description">{{ note.description }}</label><br />
         <div class="notebox-icons">
-                <ArchiveIcon></ArchiveIcon>
+                <ArchiveIcon :note="note"></ArchiveIcon>
                 <ColorPallete></ColorPallete>
                 <DeleteIcon></DeleteIcon>
                 <MoreVertIcon></MoreVertIcon>
@@ -21,36 +21,18 @@ import MoreVertIcon from './Icons/MoreVertIcon'
 import DeleteIcon from './Icons/DeleteIcon'
 import ColorPallete from './Icons/ColorPallete'
 import ArchiveIcon from './Icons/ArchiveIcon'
-// import UserService from '../services/UserService'
 export default {
   props:[
 'noteList'
   ],
   name: "DisplayNotes",
-  // data() {
-  //   return {
-  //     noteList: [],
-  //   };
-    
-  // },
+
   components:{
       ColorPallete,
       ArchiveIcon,
       DeleteIcon,
       MoreVertIcon,
     },
-  // methods: {
-  //   fetchNotes: function () {
-  //     UserService.fetchNotesList().then((response) => {
-  //       this.noteList = response.data.data.data;
-  //       console.log(this.noteList)
-  //     });
-  //   },
-  // },
-  // mounted() {
-  //   this.fetchNotes();
-  //   console.log(this.noteList)
-  // },
 }
 </script>
 
