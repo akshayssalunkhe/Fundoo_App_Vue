@@ -1,23 +1,32 @@
 <template>
 <div class="display-all-notes">
     <div class="note-cards" v-for="(note,index) in noteList" v-bind:key="index">
-      <md-card>
+      <md-card class="md-card">      
         <label class="title">{{ note.title }}</label><br />
         <label class="description">{{ note.description }}</label><br />
         <div class="notebox-icons">
                 <ArchiveIcon :note="note"></ArchiveIcon>
                 <ColorPallete></ColorPallete>
                 <DeleteIcon :note="note"></DeleteIcon>
-                <MoreVertIcon></MoreVertIcon>
+              <md-button class="md-icon-button" @click="updateBoxData(note)" >
+                  <md-icon>edit</md-icon>
+              </md-button>
 
-        </div>
+        </div>  
       </md-card>
+  
+    </div>
+    <div v-if="showUpdateBox">
+    <UpdateNote  v-bind:showUpdateBox ="showUpdateBox" v-bind:noteData="noteData">
+
+    </UpdateNote>
     </div>
   </div>
 </template>
 
 <script>
-import MoreVertIcon from './Icons/MoreVertIcon'
+import UpdateNote from "./UpdateNote";
+import { eventBus } from "../main";
 import DeleteIcon from './Icons/DeleteIcon'
 import ColorPallete from './Icons/ColorPallete'
 import ArchiveIcon from './Icons/ArchiveIcon'
@@ -26,19 +35,39 @@ export default {
 'noteList'
   ],
   name: "DisplayNotes",
+  data(){
+    return{
+      show : false,
+      noteData: {},
+      showUpdateBox:false,
 
+    }
+  },
+   
   components:{
       ColorPallete,
       ArchiveIcon,
       DeleteIcon,
-      MoreVertIcon,
+      UpdateNote,
     },
+    methods:{
+    updateBoxData: function (note) {
+      this.showUpdateBox = true;
+      this.noteData = note;
+    },
+    },
+     created() {
+    eventBus.$on("closeDialogBox", (data) => { 
+      this.showUpdateBox = data;
+    });
+  }
+    
 }
 </script>
 
 <style scoped>
 .display-all-notes {
-  justify-content: space-around;
+  justify-content: flex-start;
   display: flex;
   margin-top: 2%;
   margin-left: 10%;

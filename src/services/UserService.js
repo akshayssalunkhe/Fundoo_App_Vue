@@ -1,5 +1,5 @@
 import httpservice from './htttpservice';
-
+import {eventBus} from '../main'
 export default {
     name:'fundooService',
     getLogin(loginData) {
@@ -21,9 +21,7 @@ export default {
 
     moveToArchive(archiveData){
         alert("in user service")
-        return httpservice.postNote('notes/archiveNotes',archiveData),
-        
-        console.log(archiveData)
+        return httpservice.postNote('notes/archiveNotes',archiveData)
     },
 
     fetchArchiveNotesList(){
@@ -33,11 +31,16 @@ export default {
     moveToTrash(trashData){
         alert("in user service")
         return httpservice.postNote('notes/trashNotes',trashData),
-        
-        console.log(trashData)
+        eventBus.$emit("notelistupdate", this.noteList),
+        alert("beolw retun of trash")
+        // console.log(trashData)
     },
 
     fetchTrashNotesList(){
         return httpservice.get('notes/getTrashNotesList')
+    },
+
+    updateNotes(updateData){
+        return httpservice.postNote('notes/updateNotes',updateData)
     }
 }
