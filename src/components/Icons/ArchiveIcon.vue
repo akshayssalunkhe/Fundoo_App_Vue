@@ -21,28 +21,32 @@ note:Object,
     };
   },
   methods: {
-    fetchNotes: function () {
-      UserService.fetchNotesList().then((response) => {
-        response.data.data.data.forEach((element) => {
-          if ( element.isArchived == false) {
-            this.noteList.push(element);
-          }
-        });
-      });
-    },
+    // fetchNotes: function () {
+    //   UserService.fetchNotesList().then((response) => {
+    //     response.data.data.data.forEach((element) => {
+    //       if ( element.isArchived == false) {
+    //         this.noteList.push(element);
+    //       }
+    //       // eventBus.$emit("notelistupdate", this.noteList);
+    //     });
+    //   });
+    // },
     sendToArchive: function () {
       alert("in send to archive");
-        alert("abc ",this.$props.note.id)
-
       const data = {
         isArchived:true,
         noteIdList: [this.$props.note.id],
       };
-        UserService.moveToArchive(data).then(() => {
-        this.fetchNotes();
-        eventBus.$emit("notelistupdate", this.noteList);
+        UserService.moveToArchive(data).then((response) => {
+      this.responseData = response.data;
+      alert("above emmit")
+      eventBus.$emit("notelistupdate")
+      alert("below emit")
+      console.log("return from user service")
       });
+     
     },
+      
   },
   created() {
     eventBus.$on("getNoteId", (data) => {

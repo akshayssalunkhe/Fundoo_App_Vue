@@ -25,7 +25,7 @@ data() {
     fetchNotes: function () {
       UserService.fetchNotesList().then((response) => {
          response.data.data.data.forEach(element => {
-          if(element.isArchived==false && element.isDeleted==false ){
+          if(element.isArchived == false && element.isDeleted == false ){
             this.noteList.push(element)
           }
         });
@@ -36,11 +36,18 @@ data() {
   },
   mounted() {
     this.fetchNotes();
-    console.log(this.noteList)
+  //    eventBus.$on("notelistupdate", () => {
+  //     // this.noteId = data;
+  //     this.fetchNotes();
+  //     console.log(this.note.noteId)
+  //   });
+  //   console.log(this.noteList)
   },
   created() {
-    eventBus.$on("notelistupdate", (data) => {
-      this.noteId = data;
+    // this.fetchNotes(),
+      eventBus.$on("notelistupdate", () => {
+      // this.noteId = data;
+      this.fetchNotes();
       console.log(this.note.noteId)
     });
   },

@@ -12,7 +12,7 @@
                 <md-icon>panorama</md-icon>
             </md-button>
             </div>
-        </div>            
+            </div>            
             </md-toolbar>
         </div>
 
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { eventBus } from "../main"
 import ColorPallete from './Icons/ColorPallete'
 import ArchiveIcon from './Icons/ArchiveIcon'
 import MoreVertIcon from './Icons/MoreVertIcon'
@@ -79,10 +80,13 @@ export default {
       };
       UserService.addNote(note).then((response) => {
         this.responseData = response.data;
+        // eventBus.$emit("notelistupdate", this.noteList);
         this.title = "";
         this.description = "";
         this.userId="";
       });
+      eventBus.$emit("notelistupdate");
+
     },
 },
    created() {

@@ -31,14 +31,17 @@ note:Object,
     },
     sendToTrash: function () {
       alert("in send to trash");
-    alert("abc ",this.$props.note.id)
+     
+     alert("abc ",this.$props.note.id)
 
       const data = {
         isDeleted:true,
         noteIdList: [this.$props.note.id],
       };
         UserService.moveToTrash(data).then(() => {
+        // this.responseData = response.data;
         this.fetchNotes();
+        alert("above trash emit")
         eventBus.$emit("notelistupdate", this.noteList);
       });
     },
