@@ -46,10 +46,23 @@ export default {
       cartID:"",
       email: "",
       password: "",
+      hasEmailError: false,
+      hasPasswordError:false
      };
   },
   methods: {
     login: function () {
+      if (this.email == "" || this.password == "") {
+        alert("entre email and password")
+        return (this.hasEmailError = true),(this.hasPasswordError=true);
+      }
+      if(this.email==""){
+        alert("Entre email")
+        return (this.hasEmailError = true),(this.hasPasswordError=false);
+      }
+      if(this.password==""){
+        return (this.hasEmailError = false),(this.hasPasswordError=true);
+      }
         const loginData = {
          cartID: "",
          email: this.email,
@@ -62,9 +75,25 @@ export default {
          console.log(this.result.email);
          localStorage.setItem('token', this.result['id'])
          this.$router.push('/dashboard')
-       })
-     },
+       }),
+        (error) => {
+          console.log(error.message);
+     };
+     return (this.hasEmailError = false),(this.hasPasswordError=false);
+    },
   },
+  computed: {
+    emailValidation() {
+      return {
+        "md-invalid": this.hasEmailError,
+      };
+    },
+    passwordValidation() {
+      return {
+        "md-invalid": this.hasPasswordError,
+      };
+  },
+},
 }
 </script>
 
