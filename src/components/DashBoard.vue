@@ -11,11 +11,29 @@
               <img src="../assets/Images/keep1.png" /> Fundoo
         </span>
        <div class="md-toolbar-section-end">
-          <md-button class="md-icon-button">
-            <md-avatar>
-              <img src="../assets/Images/keep1.png" alt="Avatar">
-           </md-avatar>
-          </md-button>
+          <md-menu md-direction="bottom-end" md-size="medium" md-align-trigger>
+      <md-button md-menu-trigger>
+            <md-icon>person</md-icon>
+        </md-button>
+        <div class="menu-content">
+         <md-menu-content>
+                <div class="profile">
+                  <div class="userimg">
+                      <img src="../assets/Images/keep1.png" />
+                  </div>
+                  <div class="username">
+                    <p>akshay salunkhe </p>
+                  </div>
+                  <div class="useremail">
+                  <p> akshayssalunkhe100@gmail.com</p>
+                  </div>
+                  <div>
+                  <md-button class="signoutbtn" @click="signout">Sign-out</md-button>
+                  </div>
+                </div>
+              </md-menu-content>
+        </div> 
+    </md-menu>
       </div>
       </md-app-toolbar>
 
@@ -50,7 +68,7 @@
         </md-list>
 
        </md-app-drawer>
-     
+      
       <md-app-content>                 
          <router-view></router-view>
       </md-app-content>
@@ -69,8 +87,12 @@ import ArchiveIcon from './Icons/ArchiveIcon'
 
 export default {
   name: 'DashBoard',
+  showSidepanel:false,
     data: () => ({
-      menuVisible: false
+      menuVisible: false,
+       firstName: "",
+      email: "",
+
     }),
     components: {
    ArchiveIcon,
@@ -83,15 +105,73 @@ export default {
       toggleMenu () {
         this.menuVisible = !this.menuVisible
       },
+      imageClick() {
+    this.userLogin = !this.userLogin;
+    alert('in image click')
+      },
       routing :function (route) {
         this.$router.push("/dashboard/"+(route));
-      }
-    }
+      },
+       signout: function () {
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      localStorage.removeItem("email");
+      this.$router.push("/login");
+    },
+    },
+    created() {
+    this.firstName = localStorage.getItem("username");
+    this.email = localStorage.getItem("email");
+  },
   }
 </script>
 
 <style  scoped>
-
+.md-menu-content.md-menu-content-medium[data-v-22009874] {
+    min-width: 234px;
+    background-color: white;
+    padding: 5px;
+    position: absolute;
+    top: 60px;
+    left: 700px;
+    will-change: top, left;
+    border-radius: 10px;
+}
+.manu-content{
+  position: absolute;
+  transform: translate(400%,40%);
+  z-index: 999;
+}
+.useremail{
+  display: flex;
+}
+.signoutbtn {
+  background-color: rgb(143, 143, 255);
+  width: 40%;
+}
+.profile {
+  background-color: white;
+  width: 100%;
+  padding-top: 5px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.md-menu-content.md-menu-content-medium {
+    max-width: 210px;
+}
+.md-menu-content-container .md-list {
+    font-size: 14px;
+    background-color: white;
+}
+.userImage{
+  padding-left: 43%;
+}
+.md-menu-content-container{
+width: 260px;
+height: 260px;
+}
 .md-primary-Note{
 width: 50%;
 margin-left: 20%;
@@ -103,7 +183,7 @@ padding:0.5%;
 }
 .md-list-item:hover{
 
- background-color: whitesmoke;
+ background-color: white;
  border-top-right-radius: 20px ;
  border-bottom-right-radius: 20px ;
 
