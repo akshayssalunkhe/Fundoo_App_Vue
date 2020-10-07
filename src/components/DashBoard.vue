@@ -11,6 +11,11 @@
               <img src="../assets/Images/keep1.png" /> Fundoo
         </span>
        <div class="md-toolbar-section-end">
+        
+         <md-button @click="list" class="md-icon-button menubtn list-view">
+                <md-icon>view_list</md-icon>
+         </md-button>
+        
           <md-menu md-direction="bottom-end" md-size="medium" md-align-trigger>
       <md-button md-menu-trigger>
             <md-icon>person</md-icon>
@@ -84,11 +89,13 @@ import ReminderIcon from './Icons/ReminderIcon'
 import NotesIcon from './Icons/NotesIcon'
 import DeleteIcon from './Icons/DeleteIcon'
 import ArchiveIcon from './Icons/ArchiveIcon'
+import { eventBus } from '../main';
 
 export default {
   name: 'DashBoard',
   showSidepanel:false,
     data: () => ({
+            listView: false,
       menuVisible: false,
        firstName: "",
       email: "",
@@ -102,6 +109,14 @@ export default {
    NotesIcon,
   },
     methods: {
+       list: function () {
+      if (this.listView == false) {
+        this.listView = true;
+      } else {
+        this.listView = false;
+      }
+      eventBus.$emit("listView",this.listView);
+    },
       toggleMenu () {
         this.menuVisible = !this.menuVisible
       },
@@ -127,6 +142,12 @@ export default {
 </script>
 
 <style  scoped>
+.md-toolbar {
+    padding: 0 16px;
+    flex-flow: row;
+    position: relative;
+    z-index: 2;
+}
 .md-menu-content.md-menu-content-medium[data-v-22009874] {
     min-width: 234px;
     background-color: white;
