@@ -39,11 +39,14 @@ note:Object,
       };
         UserService.moveToArchive(data).then((response) => {
       this.responseData = response.data;
-      alert("above emmit")
+      // alert("above emmit")
       eventBus.$emit("notelistupdate")
-      alert("below emit")
-      console.log("return from user service")
+      // alert("below emit")
+      // console.log("return from user service")
       });
+      error=>{
+      console.log("Archive Notes Error",error)
+      }
      
     },
       

@@ -44,6 +44,9 @@ note:Object,
         alert("above trash emit")
         eventBus.$emit("notelistupdate", this.noteList);
       });
+       error=>{
+      console.log("Delete Error",error)
+      }
     },
   },
   created() {

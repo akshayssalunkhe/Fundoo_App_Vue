@@ -61,7 +61,9 @@ export default {
         eventBus.$emit("closeDialogBox", this.showUpdateBox);
         eventBus.$emit("notelistupdate");
       });
-
+      error=>{
+      console.log("Update Note error",error)
+      }
     },
   },
   mounted() {

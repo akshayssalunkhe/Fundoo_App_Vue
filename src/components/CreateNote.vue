@@ -16,9 +16,9 @@
             </md-toolbar>
         </div>
 
-    <div >
+    <div v-if=!show >
    
-    <md-card class="NoteCard" v-if=!show>
+    <md-card class="NoteCard" >
     <div class="Title-input">  
      <div class="md-title">
             <md-field>
@@ -40,9 +40,9 @@
              <md-button class="md-icon-button">
                <md-icon>archive</md-icon>
              </md-button>
-             <md-button class="md-icon-button">
+             <!-- <md-button class="md-icon-button">
                <md-icon>more_vert</md-icon>
-             </md-button>
+             </md-button> -->
             <md-button @click="addNote()">Close</md-button>
       </md-card-actions>
     </md-card>
@@ -80,11 +80,14 @@ export default {
       };
       UserService.addNote(note).then((response) => {
         this.responseData = response.data;
-        // eventBus.$emit("notelistupdate", this.noteList);
         this.title = "";
         this.description = "";
         this.userId="";
       });
+      error=>{
+      console.log("Create Note error",error)
+      }
+
       eventBus.$emit("notelistupdate");
 
     },
@@ -116,10 +119,10 @@ export default {
     flex: 1 1 500px;
     box-sizing: border-box;
     border-radius: 10px;
-    max-width: 700px;
-    min-width: 700px;
-    margin-right: 25%;
-    margin-left: 25%;
+    max-width: 60%;
+    min-width: 60%;
+    /* margin-right: 30%; */
+    margin-left: 20%;
     box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
 }
 .md-field.md-has-textarea:not(.md-autogrow) .md-textarea {

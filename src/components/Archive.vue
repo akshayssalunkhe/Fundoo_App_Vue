@@ -24,6 +24,9 @@ export default {
         console.log(this.archiveList)
         alert("Archive fetchnotesList")
       });
+      error=>{
+      console.log("Archive Notes Error",error)
+      }
     },
   },
   created() {

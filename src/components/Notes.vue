@@ -23,12 +23,16 @@ data() {
     },
   methods: {
     fetchNotes: function () {
+      //make empty array
       UserService.fetchNotesList().then((response) => {
          response.data.data.data.forEach(element => {
           if(element.isArchived == false && element.isDeleted == false ){
             this.noteList.push(element)
           }
         });
+      error=>{
+       console.log("Notes Error",error)
+      }
         
         console.log(this.noteList)
       });
@@ -44,9 +48,8 @@ data() {
   //   console.log(this.noteList)
   },
   created() {
-    // this.fetchNotes(),
       eventBus.$on("notelistupdate", () => {
-      // this.noteId = data;
+      this.noteList=[],
       this.fetchNotes();
       console.log(this.note.noteId)
     });

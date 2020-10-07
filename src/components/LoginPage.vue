@@ -74,10 +74,12 @@ export default {
          this.result = response.data;
          console.log(this.result.email);
          localStorage.setItem('token', this.result['id'])
+          localStorage.setItem("username",response.data.firstName);
+        localStorage.setItem("email",response.data.email);
          this.$router.push('/dashboard')
        }),
         (error) => {
-          console.log(error.message);
+          console.log("Login error", error);
      };
      return (this.hasEmailError = false),(this.hasPasswordError=false);
     },

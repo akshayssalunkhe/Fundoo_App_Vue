@@ -24,6 +24,9 @@ export default {
         console.log(this.trashList)
         alert("Trash fetchnotesList")
       });
+      error=>{
+      console.log("Trash Note error",error)
+      }
     },
   },
   created() {
