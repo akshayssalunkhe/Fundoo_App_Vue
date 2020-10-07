@@ -1,12 +1,17 @@
 <template>
 <div class="display-all-notes">
     <div class="note-cards" v-for="(note,index) in noteList" v-bind:key="index">
-      <md-card class="md-card">      
+      <div  >
+      <md-card class="card" v-bind:style="{ background: note.color }">      
         <label class="title">{{ note.title }}</label><br />
         <label class="description">{{ note.description }}</label><br />
         <div class="notebox-icons">
                 <ArchiveIcon :note="note"></ArchiveIcon>
-                <ColorPallete></ColorPallete>
+                <!-- <ColorPallete></ColorPallete> -->
+                <!-- <md-button class="md-icon-button">
+                      <md-icon>palette</md-icon>
+                 </md-button> -->
+                 <ColorPallete :note="note.id"></ColorPallete>
                 <DeleteIcon :note="note"></DeleteIcon>
               <md-button class="md-icon-button" @click="updateBoxData(note)" >
                   <md-icon>edit</md-icon>
@@ -14,7 +19,7 @@
 
         </div>  
       </md-card>
-  
+      </div>
     </div>
     <div v-if="showUpdateBox">
     <UpdateNote  v-bind:showUpdateBox ="showUpdateBox" v-bind:noteData="noteData">
@@ -60,6 +65,30 @@ export default {
     eventBus.$on("closeDialogBox", (data) => { 
       this.showUpdateBox = data;
     });
+    eventBus.$on("listView", (data) => {
+      if (data == true) {
+        document.getElementsByClassName(
+          "display-all-notes"
+        )[0].style.flexDirection = "column";
+        var styleProperty=document.getElementsByClassName(
+          "card"
+        )
+        for( var i=0;i<styleProperty.length;i++){
+          styleProperty[i].style["width"]="90%"
+        }
+      }
+      if (data == false) {
+        document.getElementsByClassName(
+          "display-all-notes"
+        )[0].style.flexDirection = "row";
+        var styleProp=document.getElementsByClassName(
+          "card"
+        )
+        for( var j=0;j<styleProp.length;j++){
+          styleProp[j].style["width"]="260px"
+        }
+      }
+    });
   }
     
 }
@@ -76,7 +105,7 @@ export default {
   min-width: 70%;
   flex-wrap: wrap;
 }
-.md-card {
+.card {
   box-shadow: none;
   border: 1px solid #e0e0e0;
   margin: 20px;
@@ -84,7 +113,7 @@ export default {
   flex-direction: column;
   border-radius: 10px;
   height: min-content;
-  width: 200px;
+  width: 260px;
   text-align: start;
   padding: 10px;
 }
@@ -103,6 +132,6 @@ export default {
 .notebox-icons {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-start;
 }
 </style>
