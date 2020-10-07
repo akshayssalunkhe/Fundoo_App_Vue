@@ -42,5 +42,8 @@ export default {
 
     updateNotes(updateData){
         return httpservice.postNote('notes/updateNotes',updateData)
+    },
+    changeCardColor(colorData){
+        return httpservice.postNote('notes/changesColorNotes',colorData)
     }
 }
