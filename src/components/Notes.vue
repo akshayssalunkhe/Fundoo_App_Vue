@@ -1,7 +1,7 @@
 <template>
 <div>
     <CreateNote></CreateNote>
-    <DisplayNotes v-bind:noteList="noteList"></DisplayNotes>
+    <DisplayNotes v-bind:noteList="filteredNoteList"></DisplayNotes>
 </div>
 </template>
 <script>
@@ -13,6 +13,7 @@ export default {
     name:"Notes",
 data() {
     return {
+      searchText:'',
       noteList: [],
     };
     
@@ -48,12 +49,22 @@ data() {
   //   console.log(this.noteList)
   },
   created() {
+     eventBus.$on("search", (data) => {
+      this.searchText=data;
+    })
       eventBus.$on("notelistupdate", () => {
       this.noteList=[],
       this.fetchNotes();
       console.log(this.note.noteId)
     });
   },
+  computed:{
+    filteredNoteList:function(){
+      return this.noteList.filter((note)=>{
+        return note.title.match(this.searchText);
+      })
+    }
+  }
 
 };
 </script>

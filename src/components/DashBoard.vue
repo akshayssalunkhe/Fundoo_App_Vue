@@ -4,41 +4,52 @@
 <div class="page-container">
     <md-app>
       <md-app-toolbar class="md-primary" md-elevation="0">
-        <md-button class="md-icon-button" @click="toggleMenu" >
-          <md-icon>menu</md-icon>
-        </md-button>
-        <span class="md-title">
-              <img src="../assets/Images/keep1.png" /> Fundoo
-        </span>
-       <div class="md-toolbar-section-end">
+         <div class="md-toolbar-section-start">
+
+            <md-button class="md-icon-button" @click="toggleMenu" >
+              <md-icon>menu</md-icon>
+            </md-button>
         
-         <md-button @click="list" class="md-icon-button menubtn list-view">
+            <span class="md-title">
+              <img src="../assets/Images/keep1.png" /> Fundoo
+            </span>
+
+            <input class="search" 
+            v-model="searchText"
+            v-bind:md-options="options"
+            placeholder="search...">
+
+         </div>
+
+        
+       <div class="md-toolbar-section-end">
+            <md-button @click="list" class="md-icon-button menubtn list-view">
                 <md-icon>view_list</md-icon>
-         </md-button>
+            </md-button>
         
           <md-menu md-direction="bottom-end" md-size="medium" md-align-trigger>
-      <md-button md-menu-trigger>
-            <md-icon>person</md-icon>
-        </md-button>
-        <div class="menu-content">
-         <md-menu-content>
-                <div class="profile">
-                  <div class="userimg">
-                      <img src="../assets/Images/keep1.png" />
-                  </div>
-                  <div class="username">
-                    <p>akshay salunkhe </p>
-                  </div>
-                  <div class="useremail">
-                  <p> akshayssalunkhe100@gmail.com</p>
-                  </div>
-                  <div>
-                  <md-button class="signoutbtn" @click="signout">Sign-out</md-button>
-                  </div>
-                </div>
-              </md-menu-content>
-        </div> 
-    </md-menu>
+              <md-button md-menu-trigger>
+                  <md-icon>person</md-icon>
+              </md-button>
+              <div class="menu-content">
+                 <md-menu-content>
+                   <div class="profile">
+                     <div class="userimg">
+                         <img src="../assets/Images/keep1.png" />
+                      </div>
+                      <div class="username">
+                         <p>{{this.firstName}} </p>
+                      </div>
+                      <div class="useremail">
+                         <p> {{this.email}}</p>
+                       </div>
+                      <div>
+                         <md-button class="signoutbtn" @click="signout">Sign-out</md-button>
+                      </div>
+                   </div>
+                </md-menu-content>
+              </div> 
+          </md-menu>
       </div>
       </md-app-toolbar>
 
@@ -99,6 +110,8 @@ export default {
       menuVisible: false,
        firstName: "",
       email: "",
+      searchText:"",
+      options:[],
 
     }),
     components: {
@@ -134,14 +147,47 @@ export default {
       this.$router.push("/login");
     },
     },
+     watch: {
+    searchText: function () {
+      eventBus.$emit("search", this.searchText);
+    },
+  },
     created() {
     this.firstName = localStorage.getItem("username");
+
     this.email = localStorage.getItem("email");
   },
+
   }
 </script>
 
 <style  scoped>
+ .search { 
+   max-width: 44%;
+  display: flex;
+  flex-direction: row;
+  background-color:whitesmoke;
+  border: none;
+  border-radius: 10px;
+  padding-right: 15%;
+  padding-left: 20%;
+  padding-top:1%;
+  padding-bottom:2%;
+  font-size :14px;
+
+  }
+  /* .search[data-v-22009874] {
+    max-width: 100%;
+    border: none;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-right: 30%;
+    padding-left: 30%;
+    border-radius: 13px;
+    font-size: 14px;
+    flex-direction: row;
+    background-color: rgb(243, 240, 240) !important;
+} */
 .md-toolbar {
     padding: 0 16px;
     flex-flow: row;
