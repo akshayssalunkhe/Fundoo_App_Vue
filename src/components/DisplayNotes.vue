@@ -7,24 +7,17 @@
         <label class="description">{{ note.description }}</label><br />
         <div class="notebox-icons">
                 <ArchiveIcon :note="note"></ArchiveIcon>
-                <!-- <ColorPallete></ColorPallete> -->
-                <!-- <md-button class="md-icon-button">
-                      <md-icon>palette</md-icon>
-                 </md-button> -->
-                 <ColorPallete :note="note.id"></ColorPallete>
+                <ColorPallete :note="note.id"></ColorPallete>
                 <DeleteIcon :note="note"></DeleteIcon>
               <md-button class="md-icon-button" @click="updateBoxData(note)" >
                   <md-icon>edit</md-icon>
               </md-button>
-
         </div>  
       </md-card>
       </div>
     </div>
     <div v-if="showUpdateBox">
-    <UpdateNote  v-bind:showUpdateBox ="showUpdateBox" v-bind:noteData="noteData">
-
-    </UpdateNote>
+    <UpdateNote  v-bind:showUpdateBox ="showUpdateBox" v-bind:noteData="noteData"></UpdateNote>
     </div>
   </div>
 </template>
@@ -74,7 +67,8 @@ export default {
           "card"
         )
         for( var i=0;i<styleProperty.length;i++){
-          styleProperty[i].style["width"]="90%"
+          styleProperty[i].style["width"]="63%"
+           styleProperty[i].style["margin-left"]="16%"
         }
       }
       if (data == false) {
