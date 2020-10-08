@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="colorp">
      <md-menu md-size="medium" md-align-trigger md-direction="top-start">
       <md-icon md-menu-trigger>palette</md-icon>
        <md-menu-content >
@@ -55,18 +55,18 @@ export default {
 }
 </script>
 <style scoped>
+.colorp{
+  padding-top: 8px;
+}
 .menu{
-      margin-left: 5%;
-
+  margin-left: 5%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 .colordiv{
-      padding: 11%;
-
+  padding: 11%;
   border-radius: 50%;
-  /* display: flex; */
   width: 22%;
   height: 45px;
   border: 1px solid grey;
