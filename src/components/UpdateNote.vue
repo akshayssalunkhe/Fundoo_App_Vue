@@ -2,7 +2,7 @@
   <div>
     <md-dialog :md-active.sync="showUpdateBox">      
     <div>   
-        <md-card class="NoteCard">
+        <md-card class="NoteCard"  v-bind:style="{ background: color }">
         <div class="Title-input">  
         <div class="md-title">
             <md-field>
@@ -18,7 +18,7 @@
       </md-card-content>
       <md-card-actions>
              <md-button class="md-icon-button">
-                <md-icon>palette</md-icon>
+                <ColorPallete v-bind:note="noteId" ></ColorPallete>
              </md-button>
              <md-button class="md-icon-button">
                <md-icon>archive</md-icon>
@@ -35,23 +35,26 @@
 </template>
 <script>
 import UserService from '../services/UserService'
+import ColorPallete from './Icons/ColorPallete'
 import { eventBus } from '../main';
 export default {
   name: "UpdateNote",
   props: ["showUpdateBox", "noteData"],
   data() {
     return {
+      color:"",
       title: "",
       description: "",
       noteId: "",
 
     };
   },
+   components:{
+      ColorPallete
+    },
   methods: {
     addNote: function () {
-    //   this.showUpdateBox = false;
-    //   eventBus.$emit("closeDialogBox", this.showUpdateBox);
- const updateData = {
+      const updateData = {
         noteId: this.noteId,
         title: this.title,
         description: this.description,
@@ -70,8 +73,14 @@ export default {
     this.title = this.$props.noteData.title;
     this.description = this.$props.noteData.description;
     this.noteId = this.$props.noteData.id;
+    this.color=this.$props.noteData.color;
 
   },
+   created(){
+    eventBus.$on("getUpdated", (data) => {
+      this.color = data;
+    });
+  }
   
 };
 </script>

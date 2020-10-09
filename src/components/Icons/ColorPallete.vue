@@ -45,7 +45,8 @@ export default {
     //   });
     if (this.createNote == true) {
         eventBus.$emit("getColorUpdated", colorData);
-      } else {
+      } else { 
+        eventBus.$emit("getUpdated", colorData);
         const data = {
           color: this.setColor,
           noteIdList: [this.note],
@@ -70,16 +71,17 @@ export default {
   padding-top: 8px;
 }
 .menu{
-  margin-left: 5%;
+  padding: 3%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  z-index: 9999;
+  background-color: white;
 }
 .colordiv{
   padding: 11%;
   border-radius: 50%;
-  width: 22%;
-  height: 45px;
+  margin:1px;
   border: 1px solid grey;
 }
 </style>
