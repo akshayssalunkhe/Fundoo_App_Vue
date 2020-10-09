@@ -13,16 +13,9 @@
             <span class="md-title">
               <img src="../assets/Images/keep1.png" /> Fundoo
             </span>
-
-            <!-- <input class="search" 
-            v-model="searchText"
-            v-bind:md-options="options"
-            placeholder="search..."> -->
-
          </div>
           
-          <input class="search" v-model="searchText" v-bind:md-options="options" placeholder="search...">
-
+          <input class="search" v-model="searchText"  placeholder="search...">
         
        <div class="md-toolbar-section-end">
             <md-button @click="list" class="md-icon-button menubtn list-view">
@@ -164,32 +157,15 @@ export default {
 </script>
 
 <style  scoped>
- .search { 
-   max-width: 100%;
-  display: flex;
-  flex-direction: row;
-  background-color:whitesmoke;
-  border: none;
-  border-radius: 15px;
-  padding-right: 15%;
-  padding-left: 2%;
-  padding-top:1%;
-  padding-bottom:1%;
-  font-size :15px;
-
-  }
-  /* .search[data-v-22009874] {
-    max-width: 100%;
+  .search[data-v-22009874] {
+    width: 40%;
+    background-color: whitesmoke;
     border: none;
-    padding-top: 3%;
-    padding-bottom: 3%;
-    padding-right: 30%;
-    padding-left: 30%;
-    border-radius: 13px;
-    font-size: 14px;
-    flex-direction: row;
-    background-color: rgb(243, 240, 240) !important;
-} */
+    border-radius: 15px;
+    padding-left: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
 .md-toolbar {
     padding: 0 16px;
     flex-flow: row;
