@@ -18,7 +18,7 @@
 
     <div v-if=!show >
    
-    <md-card class="NoteCard" >
+    <md-card class="NoteCard"  v-bind:style="{ background: cardColor }"  >
     <div class="Title-input">  
      <div class="md-title">
             <md-field>
@@ -34,15 +34,12 @@
           </md-field>
       </md-card-content>
       <md-card-actions>
-             <md-button class="md-icon-button">
-                <md-icon>palette</md-icon>
-             </md-button>
-             <md-button class="md-icon-button">
-               <md-icon>archive</md-icon>
-             </md-button>
-             <!-- <md-button class="md-icon-button">
-               <md-icon>more_vert</md-icon>
-             </md-button> -->
+        <md-button>
+                <ColorPallete v-bind:createNote="createNote" ></ColorPallete>
+        </md-button>
+        <md-button class="md-icon-button">
+               <ArchiveIcon></ArchiveIcon>
+        </md-button>
             <md-button @click="addNote()">Close</md-button>
       </md-card-actions>
     </md-card>
@@ -54,22 +51,24 @@
 import { eventBus } from "../main"
 import ColorPallete from './Icons/ColorPallete'
 import ArchiveIcon from './Icons/ArchiveIcon'
-import MoreVertIcon from './Icons/MoreVertIcon'
+// import MoreVertIcon from './Icons/MoreVertIcon'
 import UserService from "../services/UserService";
 export default {
     name:"CreateNote",
      data(){
          return{
+    cardColor:'',
+    createNote:true,
     title:'',
     description:'',
     show:true,
-    components:{
-        ColorPallete,
-        ArchiveIcon,
-        MoreVertIcon
-    }
    }
        },
+       components:{
+        ArchiveIcon,
+        // MoreVertIcon,
+        ColorPallete
+    },
     methods:{
     
     addNote: function () {
@@ -77,12 +76,15 @@ export default {
       const note = {
         title: this.title,
         description: this.description,
+        color:this.cardColor,
       };
       UserService.addNote(note).then((response) => {
         this.responseData = response.data;
         this.title = "";
         this.description = "";
         this.userId="";
+        this.cardColor='';
+
       });
       error=>{
       console.log("Create Note error",error)
@@ -96,6 +98,9 @@ export default {
     if (localStorage.getItem("token") == undefined) {
       this.$router.push("/login");
     }
+    eventBus.$on("getColorUpdated",(data)=>{
+      this.cardColor=data;
+    })
   }
 }
 </script>
@@ -132,8 +137,8 @@ export default {
 .md-field {
   height: 40px;
   padding-top: 0px;;
-    margin: 0px;
-    padding-left: 5px;
+  margin: 0px;
+  padding-left: 5px;
 }
 .titlepc{
   padding-left:15px; 

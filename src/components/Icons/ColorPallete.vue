@@ -18,7 +18,7 @@ import UserService from '../../services/UserService'
 
 export default {
     name:"ColorPallate",
-   props:['note'],
+   props:['note','createNote'],
     data(){
     return{
        isColorShow: false,
@@ -35,14 +35,25 @@ export default {
   methods: {
     changeBackgroundColor: function (colorData) {
       alert("in function")
-    this.setColor=colorData;
-    const data={
-      color:this.setColor,
-      noteIdList: [this.note],
-    };
-      UserService.changeCardColor(data).then(() => {
-        eventBus.$emit("notelistupdate");
-      });
+      this.setColor=colorData;
+      // const data={
+    //    color:this.setColor,
+    //    noteIdList: [this.note],
+    // };
+    //   UserService.changeCardColor(data).then(() => {
+    //     eventBus.$emit("notelistupdate");
+    //   });
+    if (this.createNote == true) {
+        eventBus.$emit("getColorUpdated", colorData);
+      } else {
+        const data = {
+          color: this.setColor,
+          noteIdList: [this.note],
+        };
+        UserService.changeCardColor(data).then(() => {
+          eventBus.$emit("notelistupdate");
+        });
+      }
     }
   }, 
 //   created() {

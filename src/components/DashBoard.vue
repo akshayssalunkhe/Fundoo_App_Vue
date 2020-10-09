@@ -14,12 +14,14 @@
               <img src="../assets/Images/keep1.png" /> Fundoo
             </span>
 
-            <input class="search" 
+            <!-- <input class="search" 
             v-model="searchText"
             v-bind:md-options="options"
-            placeholder="search...">
+            placeholder="search..."> -->
 
          </div>
+          
+          <input class="search" v-model="searchText" v-bind:md-options="options" placeholder="search...">
 
         
        <div class="md-toolbar-section-end">
@@ -163,17 +165,17 @@ export default {
 
 <style  scoped>
  .search { 
-   max-width: 44%;
+   max-width: 100%;
   display: flex;
   flex-direction: row;
   background-color:whitesmoke;
   border: none;
-  border-radius: 10px;
+  border-radius: 15px;
   padding-right: 15%;
-  padding-left: 20%;
+  padding-left: 2%;
   padding-top:1%;
-  padding-bottom:2%;
-  font-size :14px;
+  padding-bottom:1%;
+  font-size :15px;
 
   }
   /* .search[data-v-22009874] {
