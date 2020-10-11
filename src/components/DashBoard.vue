@@ -139,7 +139,7 @@ export default {
       localStorage.removeItem("token");
       localStorage.removeItem("username");
       localStorage.removeItem("email");
-      this.$router.push("/login");
+      this.$router.push("/");
     },
     },
      watch: {
