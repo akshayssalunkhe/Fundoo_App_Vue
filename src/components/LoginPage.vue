@@ -32,6 +32,10 @@
             <md-button class="md-raised md-primary" type="submit" @click="login">Log In</md-button>
 
         </div>
+        <!-- :md-duration="isInfinity ? Infinity : duration"  -->
+        <md-snackbar md-position="left" :md-duration="4000" :md-active.sync="showSnackbar" md-persistent>
+      <span>{{message}}</span>
+    </md-snackbar>
     </div>
  </div>
 </template>
@@ -43,11 +47,15 @@ export default {
 
     data() {
     return {
+      isInfinity:"false",
+      message:"",
       cartID:"",
       email: "",
       password: "",
       hasEmailError: false,
-      hasPasswordError:false
+      hasPasswordError:false,
+      showSnackbar:false,
+      // duration:"4000ms"
      };
   },
   methods: {
@@ -71,11 +79,14 @@ export default {
        };
 
      service.getLogin(loginData).then((response) => {
-         this.result = response.data;
+        this.result = response.data;
+        this.showSnackbar=true
+        this.message = "Login Successful";
+
          console.log(this.result.email);
          localStorage.setItem('token', this.result['id'])
-          localStorage.setItem("username",response.data.firstName);
-        localStorage.setItem("email",response.data.email);
+         localStorage.setItem("username",response.data.firstName);
+         localStorage.setItem("email",response.data.email);
          this.$router.push('/dashboard')
        }),
         (error) => {
@@ -84,18 +95,18 @@ export default {
      return (this.hasEmailError = false),(this.hasPasswordError=false);
     },
   },
-  computed: {
-    emailValidation() {
-      return {
-        "md-invalid": this.hasEmailError,
-      };
-    },
-    passwordValidation() {
-      return {
-        "md-invalid": this.hasPasswordError,
-      };
-  },
-},
+//   computed: {
+//     emailinput() {
+//       return {
+//         "md-invalid": this.hasEmailError,
+//       };
+//     },
+//     passwordinput() {
+//       return {
+//         "md-invalid": this.hasPasswordError,
+//       };
+//   },
+// },
 }
 </script>
 

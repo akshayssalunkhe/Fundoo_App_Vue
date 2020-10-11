@@ -114,8 +114,8 @@ export default {
 }
 .takenote{
   margin-top:2%;
-    margin-right: 25%;
-    margin-left: 25%;
+    margin-right: 20%;
+    margin-left: 20%;
 }
 .NoteCard{
     margin-top:2%;

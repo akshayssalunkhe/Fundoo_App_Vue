@@ -18,6 +18,7 @@ note:Object,
     return {
       cartId: [],
       noteList: [],
+      archive:true,
     };
   },
   methods: {
@@ -44,6 +45,9 @@ note:Object,
       // alert("below emit")
       // console.log("return from user service")
       });
+      
+      eventBus.$emit("isArchived",this.archive)
+
       error=>{
       console.log("Archive Notes Error",error)
       }
