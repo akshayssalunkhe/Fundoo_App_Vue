@@ -23,10 +23,10 @@ export default {
         this.archiveList = response.data.data.data;
         console.log(this.archiveList)
         alert("Archive fetchnotesList")
-      });
-      error=>{
-      console.log("Archive Notes Error",error)
-      }
+      })
+     .catch((error) => {
+          console.log("Archive Notes error", error);
+        });
     },
   },
   created() {

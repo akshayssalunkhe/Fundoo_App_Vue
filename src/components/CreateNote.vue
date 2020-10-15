@@ -85,10 +85,10 @@ export default {
         this.userId="";
         this.cardColor='';
 
-      });
-      error=>{
-      console.log("Create Note error",error)
-      }
+      })
+      .catch((error) => {
+          console.log("Create Notes error", error);
+        });
 
       eventBus.$emit("notelistupdate");
 

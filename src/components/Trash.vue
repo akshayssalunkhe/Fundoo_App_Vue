@@ -23,10 +23,10 @@ export default {
         this.trashList = response.data.data.data;
         console.log(this.trashList)
         alert("Trash fetchnotesList")
-      });
-      error=>{
-      console.log("Trash Note error",error)
-      }
+      })
+      .catch((error) => {
+          console.log("Trash Notes error", error);
+        });
     },
   },
   created() {

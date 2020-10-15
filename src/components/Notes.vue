@@ -37,10 +37,10 @@ data() {
           if(element.isArchived == false && element.isDeleted == false ){
             this.noteList.push(element)
           }
+        })
+      .catch((error) => {
+          console.log("Notes error", error);
         });
-      error=>{
-       console.log("Notes Error",error)
-      }
         
         console.log(this.noteList)
       });

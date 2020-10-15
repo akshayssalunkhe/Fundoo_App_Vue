@@ -88,10 +88,10 @@ export default {
          localStorage.setItem("username",response.data.firstName);
          localStorage.setItem("email",response.data.email);
          this.$router.push('/dashboard')
-       }),
-        (error) => {
+       })
+        .catch((error) => {
           console.log("Login error", error);
-     };
+        });
      return (this.hasEmailError = false),(this.hasPasswordError=false);
     },
   },

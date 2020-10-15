@@ -44,15 +44,14 @@ note:Object,
       eventBus.$emit("notelistupdate")
       // alert("below emit")
       // console.log("return from user service")
-      });
-      
+      })
       eventBus.$emit("isArchived",this.archive)
 
-      error=>{
+      .catch((error)=>{
       console.log("Archive Notes Error",error)
       }
      
-    },
+      )},
       
   },
   created() {

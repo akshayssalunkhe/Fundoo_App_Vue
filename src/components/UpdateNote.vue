@@ -63,10 +63,10 @@ export default {
         this.showUpdateBox = false;
         eventBus.$emit("closeDialogBox", this.showUpdateBox);
         eventBus.$emit("notelistupdate");
-      });
-      error=>{
-      console.log("Update Note error",error)
-      }
+      })
+     .catch((error) => {
+          console.log("Update Notes error", error);
+        });
     },
   },
   mounted() {

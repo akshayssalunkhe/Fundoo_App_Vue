@@ -53,6 +53,9 @@ export default {
         };
         UserService.changeCardColor(data).then(() => {
           eventBus.$emit("notelistupdate");
+        })
+        .catch((error) => {
+          console.log("Color Pallete error", error);
         });
       }
     }

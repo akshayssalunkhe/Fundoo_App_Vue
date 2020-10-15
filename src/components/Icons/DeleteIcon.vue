@@ -26,6 +26,9 @@ note:Object,
           if (element.isDeleted == false && element.isArchived == false) {
             this.noteList.push(element);
           }
+        })
+        .catch((error) => {
+          console.log("fetch Nots error", error);
         });
       });
     },
@@ -43,10 +46,10 @@ note:Object,
         this.fetchNotes();
         alert("above trash emit")
         eventBus.$emit("notelistupdate", this.noteList);
-      });
-       error=>{
-      console.log("Delete Error",error)
-      }
+      })
+       .catch((error) => {
+          console.log("trash error", error);
+        });
     },
   },
   created() {
