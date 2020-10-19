@@ -2,7 +2,9 @@
 <div>
     <CreateNote></CreateNote>
     
-     <md-progress-spinner :class="{visibility:!visibility}" md-mode="indeterminate"></md-progress-spinner>
+        <!-- <md-progress-spinner md-mode="indeterminate"></md-progress-spinner> -->
+
+     <md-progress-spinner :class="{visibility:!visibility}"  md-mode="indeterminate"></md-progress-spinner>
 
     <DisplayNotes v-bind:noteList="filteredNoteList"></DisplayNotes>
 </div>
@@ -38,9 +40,9 @@ data() {
             this.noteList.push(element)
           }
         })
-      .catch((error) => {
-          console.log("Notes error", error);
-        });
+      // .catch((error) => {
+      //     console.log("Notes error", error);
+      //   });
         
         console.log(this.noteList)
       });
@@ -78,10 +80,12 @@ data() {
 <style scoped>
 .md-progress-spinner{
   margin: 10px;
+  position: relative;
+  top: 30vh;
+  left: 50vw;
 }
 .visibility{
   display: none;
 }
-
 
 </style>
